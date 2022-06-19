@@ -1,0 +1,45 @@
+npm audit fix
+
+https://www.youtube.com/watch?v=lzV5yZ_xxJw&list=PL3CRqF9WxjEZZL6WFETG1-MEQCmSuBDMy&index=2
+
+npm init -y
+
+npm install express body-parser mongoose cors morgan bcryptjs jsonwebtoken nodemon dotenv
+
+npm start
+
+express     nodejs framework
+body-parser รับส่งข้อมูบ client ไป server
+mongoose    db
+cors        จัดการ api
+morgan      ดู log ตอนตอนเข้ามาที่ server
+bcryptjs    เข้ารหัส password
+jsonwebtoken    แปลง
+nodemon
+dotenv      เก็บ ตัวแปล
+momentjs    แสดงเวลา
+
+// middlleware
+app.use(morgan("dev")); // แสดงlog เวลาเชือมต่อ
+app.use(bodyParser.json({limit:'20mb'})); // กำหนดข้อมูลในการเชือมต่อ
+app.use(cors()); //จัดการดึงข้อมูล api
+
+
+npx create-react-app client
+
+npm install axios react-router-dom redux react-redux redux-devtools-extension react-toastify moment react-moment
+
+axios               res api  get put post
+react-router-dom    click link
+redux               จัดเก็บ state
+react-redux         
+redux-devtools-extension 
+react-toastify      แจ้งเตือน
+
+moment react-moment
+
+npm i antd react-toastify
+
+
+
+
