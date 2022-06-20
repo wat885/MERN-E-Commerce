@@ -9,6 +9,9 @@ const connectDB = require('./config/db')
 
 const app = express()
 
+
+// Route >> controllers >> models
+
 // middlleware
 app.use(morgan("dev")); // แสดงlog เวลาเชือมต่อ
 app.use(bodyParser.json({limit:'20mb'})); // กำหนดข้อมูลในการเชือมต่อ

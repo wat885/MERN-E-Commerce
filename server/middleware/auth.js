@@ -12,8 +12,8 @@ exports.auth = (req, res, next) => {
     //decode token
     const decoded = jwt.verify(token, "jwtSecret");
 
-    // เมือlogin แล้วเก็บ user ไว้ที่ req. user
     console.log("midleware", decoded);
+    // เมือlogin แล้วเก็บ user ไว้ที่ req. user
     req.user = decoded.user 
 
 
