@@ -9,9 +9,11 @@ import Home from "./components/pages/Home";
 import Navbar from "./components/layouts/Navbar";
 
 import { Routes, Route } from "react-router-dom";
+
 // pages admin
 import HomeAdmin from "./components/pages/admin/Home";
 import ManageAdmin from "./components/pages/admin/ManageAdmin";
+import CreateCategory from "./components/pages/admin/CreateCategory";
 
 // pages user
 import HomeUser from "./components/pages/user/Home";
@@ -78,6 +80,15 @@ function App() {
             // ใส่ UserRoute ครอบหน้าที่ต้องการจำกัด ว่าเป็น admin เท่านั้น
             <AdminRoute>
               <ManageAdmin />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/create-category"
+          element={
+            <AdminRoute>
+              <CreateCategory />
             </AdminRoute>
           }
         />

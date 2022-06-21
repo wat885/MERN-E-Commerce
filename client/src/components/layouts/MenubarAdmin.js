@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+
 const MenubarAdmin = () => {
   return (
     <nav>
@@ -12,6 +13,12 @@ const MenubarAdmin = () => {
         <li className="nav-item">
           <Link to="/admin/manage-admin">จัดการผู้ใช้งาน</Link>
         </li>
+
+        <li className="nav-item">
+          <Link to="/admin/create-category">เพิ่มหมวดหมู่</Link>
+        </li>
+
+
       </ul>
     </nav>
   );

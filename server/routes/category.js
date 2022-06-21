@@ -15,13 +15,9 @@ const { auth, adminCheck } = require("../middleware/auth");
 
 //endpoint http://localhost:5000/api/category
 router.get("/category", list);
-
 router.post("/category", create);
-
 router.get("/category/:id", read);
-
 router.put("/category/:id", update);
-
 router.delete("/category/:id", remove);
 
 module.exports = router;
