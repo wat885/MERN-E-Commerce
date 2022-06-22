@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import MenubarAdmin from "../../layouts/MenubarAdmin";
 
 //functions
-import { createCategory, listCategory } from "../../functions/category";
+import {
+  createCategory,
+  listCategory,
+  deleteCategory,
+} from "../../functions/category";
 
 const CreateCategory = () => {
   const [values, setValues] = useState({
@@ -27,6 +31,17 @@ const CreateCategory = () => {
   };
   console.log("data category", category);
 
+  const handleRemove = (id) => {
+    deleteCategory(id)
+      .then((res) => {
+        console.log(res);
+        loadData();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const handleChangeCategory = (e) => {
     // console.log(e.target.value);
     //เก็บค่า
@@ -40,6 +55,7 @@ const CreateCategory = () => {
     createCategory(values)
       .then((res) => {
         console.log(res);
+        loadData();
       })
       .catch((err) => {
         console.log(err);
@@ -78,12 +94,16 @@ const CreateCategory = () => {
             {category.map((item) => (
               <li className="list-group-item d-flex justify-content-between align-items-center">
                 {item.name}
-                <span className="badge bg-primary rounded-pill">x</span>
+                <span
+                  className="badge bg-primary rounded-pill"
+                  onClick={() => handleRemove(item._id)}
+                >
+                  x
+                </span>
               </li>
             ))}
           </ul>
         </div>
-        
       </div>
     </div>
   );
