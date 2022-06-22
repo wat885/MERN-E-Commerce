@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import MenubarAdmin from "../../layouts/MenubarAdmin";
+import MenubarAdmin from "../../../layouts/MenubarAdmin";
 
 //functions
 import {
   createCategory,
   listCategory,
   deleteCategory,
-} from "../../functions/category";
+} from "../../../functions/category";
+
+import { Link } from "react-router-dom";
 
 const CreateCategory = () => {
   const [values, setValues] = useState({
@@ -92,13 +94,24 @@ const CreateCategory = () => {
 
           <ul className="list-group">
             {category.map((item) => (
-              <li className="list-group-item d-flex justify-content-between align-items-center">
+              <li className="list-group-item">
                 {item.name}
                 <span
+                  style={{ float: "right" }}
                   className="badge bg-primary rounded-pill"
                   onClick={() => handleRemove(item._id)}
                 >
                   x
+                </span>
+                <span
+                  style={{ float: "right" }}
+                  className="badge bg-primary rounded-pill"
+                >
+                  {/* <Link to={`/admin/update-category/${item._id}`}> */}
+                  <Link to={"/admin/update-category/" + item._id}>
+                    {/* tag a  */}
+                    Edit
+                  </Link>
                 </span>
               </li>
             ))}
