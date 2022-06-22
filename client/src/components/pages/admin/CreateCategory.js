@@ -2,12 +2,30 @@ import React, { useState, useEffect } from "react";
 import MenubarAdmin from "../../layouts/MenubarAdmin";
 
 //functions
-import { createCategory } from "../../functions/category";
+import { createCategory, listCategory } from "../../functions/category";
 
 const CreateCategory = () => {
   const [values, setValues] = useState({
     name: "",
   });
+
+  const [category, setCategory] = useState([]);
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = () => {
+    listCategory()
+      .then((res) => {
+        // console.log(res.data);
+        setCategory(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  console.log("data category", category);
 
   const handleChangeCategory = (e) => {
     // console.log(e.target.value);
@@ -53,7 +71,19 @@ const CreateCategory = () => {
               <button className="btn btn-outline-primary">เพิ่ม</button>
             </div>
           </form>
+
+          <hr />
+
+          <ul className="list-group">
+            {category.map((item) => (
+              <li className="list-group-item d-flex justify-content-between align-items-center">
+                {item.name}
+                <span className="badge bg-primary rounded-pill">x</span>
+              </li>
+            ))}
+          </ul>
         </div>
+        
       </div>
     </div>
   );
