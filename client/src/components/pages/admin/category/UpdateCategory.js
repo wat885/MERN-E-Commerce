@@ -6,8 +6,10 @@ import { EditCategory, ReadCategory } from "../../../functions/category";
 import { useParams, useNavigate } from "react-router-dom";
 //      พารา        ใช้กลับไปหน้าเดิม
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const UpdateCategory = () => {
+  const { user } = useSelector((state) => ({ ...state }));
   const navigate = useNavigate();
   const param = useParams();
   // console.log(param.id)
@@ -15,11 +17,11 @@ const UpdateCategory = () => {
   const [name, setName] = useState("");
   useEffect(() => {
     //
-    loadData(param.id);
+    loadData(user.token, param.id);
   }, []);
 
-  const loadData = (id) => {
-    ReadCategory(id)
+  const loadData = (authtoken, id) => {
+    ReadCategory(authtoken, id)
       .then((res) => {
         // console.log(res.data.name);
         setName(res.data.name);
@@ -34,10 +36,10 @@ const UpdateCategory = () => {
   const handleSubmit = (e) => {
     console.log(name);
     e.preventDefault();
-    EditCategory(param.id, { name })
+    EditCategory(user.token, param.id, { name })
       .then((res) => {
         navigate("/admin/create-category");
-        toast.success("Update "+res.data.name+ " Success!!")
+        toast.success("Update " + res.data.name + " Success!!");
         console.log(res);
       })
       .catch((err) => console.log(err));

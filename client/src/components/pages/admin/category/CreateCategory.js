@@ -10,7 +10,15 @@ import {
 
 import { Link } from "react-router-dom";
 
+// redux
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+
 const CreateCategory = () => {
+  const {user} =  useSelector((state)=>({... state}))
+
+  console.log('state user ', user.token)
+
   const [values, setValues] = useState({
     name: "",
   });
@@ -18,11 +26,11 @@ const CreateCategory = () => {
   const [category, setCategory] = useState([]);
 
   useEffect(() => {
-    loadData();
+    loadData(user.token);
   }, []);
 
-  const loadData = () => {
-    listCategory()
+  const loadData = (authtoken) => {
+    listCategory(authtoken)
       .then((res) => {
         // console.log(res.data);
         setCategory(res.data);
@@ -34,13 +42,15 @@ const CreateCategory = () => {
   console.log("data category", category);
 
   const handleRemove = (id) => {
-    deleteCategory(id)
+    deleteCategory(user.token , id)
       .then((res) => {
         console.log(res);
-        loadData();
+        loadData(user.token);
+        toast.success('Remove Data'+ res.data.name + " Success!!!")
       })
       .catch((err) => {
         console.log(err);
+        toast.error('Error! Remove Data')
       });
   };
 
@@ -54,13 +64,15 @@ const CreateCategory = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(values.name)
-    createCategory(values)
+    createCategory(user.token, values)
       .then((res) => {
         console.log(res);
-        loadData();
+        loadData(user.token);
+        toast.success('Inser Data'+ res.data.name + " Success!!!")
       })
       .catch((err) => {
         console.log(err);
+        toast.error('Error! Inser Data')
       });
 
     // setValues({ ...values, name: "" });
