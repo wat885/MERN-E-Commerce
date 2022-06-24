@@ -6,13 +6,17 @@ const ProductSchema = new mongoose.Schema(
     title: {
       type: String,
     },
-    desciption: {
+    description: {
       type: String,
+    },
+    category: {
+      type: ObjectId,
+      ref: "category",
     },
     price: {
       type: Number,
     },
-    quatity: Number,
+    quantity: Number,
     images: {
       type: Array,
     },
