@@ -5,10 +5,12 @@ import { useSelector } from "react-redux";
 
 //fuction
 import { createProduct } from "../../../functions/product";
+import { listCategory } from "../../../functions/category";
 
 const initialstate = {
   title: "Notebook",
   description: "DES",
+  categories: [],
   category: "",
   price: "100",
   quantity: "5",
@@ -18,12 +20,29 @@ const initialstate = {
 const Home = () => {
   const { user } = useSelector((state) => ({ ...state }));
   const [values, setValues] = useState(initialstate);
-
   // console.log('user' , user)
+
+  useEffect(() => {
+    //
+    loadData(user.token);
+  }, []);
+
+  const loadData = (authtokken) => {
+    listCategory(authtokken)
+      .then((res) => {
+        // console.log(res.data);
+        setValues({ ...values, categories: res.data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  console.log("values", values);
 
   const handleChange = (e) => {
     // console.log(e.target.name,e.target.value)
     setValues({ ...values, [e.target.name]: e.target.value });
+    //      มาจาก input      name="xxxx"      value={xxxxx}
   };
 
   const handleSubmit = (e) => {
@@ -88,6 +107,23 @@ const Home = () => {
                 value={values.quantity}
                 onChange={handleChange}
               />
+            </div>
+
+            <div className="form-group">
+              <label>Category</label>
+              <select
+                className="form-control"
+                name="category"
+                onChange={handleChange}
+              >
+                <option>Please Select</option>
+                {values.categories.length > 0 &&
+                  values.categories.map((item) => (
+                    <option key={item._id} value={item._id}>
+                      {item.name}
+                    </option>
+                  ))}
+              </select>
             </div>
 
             <button className="btn btn-primary ">Submit</button>
