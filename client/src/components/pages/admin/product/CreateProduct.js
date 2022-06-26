@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 //fuction
 import { createProduct } from "../../../functions/product";
 import { listCategory } from "../../../functions/category";
+import FileUpload from "./FileUpload";
 
 const initialstate = {
   title: "Notebook",
@@ -125,6 +126,8 @@ const Home = () => {
                   ))}
               </select>
             </div>
+
+            <FileUpload />
 
             <button className="btn btn-primary ">Submit</button>
           </form>
