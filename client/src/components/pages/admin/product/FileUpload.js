@@ -3,14 +3,16 @@ import Resize from "react-image-file-resizer";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-const FileUpload = () => {
+const FileUpload = ({ values, setValues }) => {
   const { user } = useSelector((state) => ({ ...state }));
 
+  // console.log("values in fileupload", values);
 
   const handleChangeFile = (e) => {
     const files = e.target.files;
     // console.log(e.target.files);
     if (files) {
+      let allfileUpload = values.images; //[]
       for (let i = 0; i < files.length; i++) {
         // console.log(files[i]);
         Resize.imageFileResizer(
@@ -34,9 +36,13 @@ const FileUpload = () => {
                   },
                 }
               )
-              .then((res) => console.log(res))
+              .then((res) => {
+                // console.log(res);
+                allfileUpload.push(res.data);
+                console.log("allfileupload in then", allfileUpload);
+                setValues({...values, images:allfileUpload})
+              })
               .catch((err) => console.log(err));
-
           },
           "base64"
         );

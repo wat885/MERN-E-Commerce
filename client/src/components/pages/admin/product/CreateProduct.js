@@ -127,7 +127,7 @@ const Home = () => {
               </select>
             </div>
 
-            <FileUpload />
+            <FileUpload values={values} setValues={setValues} />
 
             <button className="btn btn-primary ">Submit</button>
           </form>
