@@ -1,8 +1,12 @@
 import React from "react";
 import Resize from "react-image-file-resizer";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 const FileUpload = () => {
+  const { user } = useSelector((state) => ({ ...state }));
+
+
   const handleChangeFile = (e) => {
     const files = e.target.files;
     // console.log(e.target.files);
@@ -18,7 +22,21 @@ const FileUpload = () => {
           0,
           (uri) => {
             //
-            console.log(uri);
+            axios
+              .post(
+                process.env.REACT_APP_API + "/images",
+                {
+                  image: uri,
+                },
+                {
+                  headers: {
+                    authtoken: user.token,
+                  },
+                }
+              )
+              .then((res) => console.log(res))
+              .catch((err) => console.log(err));
+
           },
           "base64"
         );
