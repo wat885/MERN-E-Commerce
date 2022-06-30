@@ -6,7 +6,9 @@ import { useSelector } from "react-redux";
 //fuction
 import { createProduct } from "../../../functions/product";
 import { listCategory } from "../../../functions/category";
+
 import FileUpload from "./FileUpload";
+import { Spin } from "antd";
 
 const initialstate = {
   title: "Notebook",
@@ -22,6 +24,7 @@ const Home = () => {
   const { user } = useSelector((state) => ({ ...state }));
   const [values, setValues] = useState(initialstate);
   // console.log('user' , user)
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     //
@@ -66,7 +69,13 @@ const Home = () => {
           <MenubarAdmin />
         </div>
         <div className="col">
-          <h1>Create Product Page</h1>
+          {loading ? (
+            <h1>
+              Loading... <Spin />
+            </h1>
+          ) : (
+            <h1>Create Product Page</h1>
+          )}
 
           <form onSubmit={handleSubmit}>
             <div className="form-group">
@@ -127,7 +136,12 @@ const Home = () => {
               </select>
             </div>
 
-            <FileUpload values={values} setValues={setValues} />
+            <FileUpload
+              loading={loading}
+              setLoading={setLoading}
+              values={values}
+              setValues={setValues}
+            />
 
             <button className="btn btn-primary ">Submit</button>
           </form>
