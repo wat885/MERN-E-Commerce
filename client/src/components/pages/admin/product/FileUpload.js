@@ -57,19 +57,47 @@ const FileUpload = ({ values, setValues, loading, setLoading }) => {
       }
     }
   };
+
+  const handleRemove = (public_id) => {
+    setLoading(true)
+    // console.log(public_id);
+    // const img = values.images
+    const { images } = values;
+    axios
+      .post(
+        process.env.REACT_APP_API + "/removeimages",
+        { public_id },
+        {
+          headers: {
+            authtoken: user.token,
+          },
+        }
+      )
+      .then((res) => {
+        setLoading(false)
+        let filterImages = images.filter((item) => {
+          return item.public_id !== public_id  // กรองออก 
+        });
+        setValues({...values, images: filterImages});
+      })
+      .catch((err) => {
+        setLoading(false)
+        console.log(err);
+      });
+  };
   return (
     <>
       <br />
       {values.images &&
-        values.images.map((item) => (
+        values.images.map((c) => (
           <span className="avatar-item">
-            <Badge count="X">
-              <Avatar
-                className="m-3"
-                src={item.url}
-                shape="square"
-                size={120}
-              />
+            <Badge
+              // key={c.public_id}
+              onClick={() => handleRemove(c.public_id)}
+              count="X"
+              style={{ cursor: "pointer" }}
+            >
+              <Avatar className="m-3" src={c.url} shape="square" size={120} />
             </Badge>
           </span>
         ))}
