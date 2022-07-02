@@ -39,7 +39,7 @@ const Home = () => {
 
           <div className="row">
             {product.map((item) => (
-              <div key={item._id} className="col-md-4">
+              <div key={item._id} className="col-md-4 pb-3">
                 <AdminProductCard product={item} />
               </div>
             ))}
