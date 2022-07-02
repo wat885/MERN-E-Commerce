@@ -14,7 +14,14 @@ exports.create = async (req, res) => {
 
 exports.list = async (req, res) => {
   try {
-    const product = await Product.find().populate('category')
+    // มาจากพารามิเตอร์ url
+    const count = parseInt(req.params.count);
+    // console.log(count);
+
+    const product = await Product.find()
+      .limit(count)
+      .populate("category")
+      .sort([["createdAt", "desc"]]); // sport ข้อมูลล่าสุด ให้เป็นข้อมูลแรก
 
     res.send(product);
   } catch (err) {
