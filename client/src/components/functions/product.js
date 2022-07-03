@@ -11,3 +11,11 @@ export const createProduct = async (authtoken, value) => {
 export const listProduct = async (count) => {
   return await axios.get(process.env.REACT_APP_API + "/product/" + count);
 };
+
+export const removeProduct = async (authtoken, id) => {
+  return await axios.delete(process.env.REACT_APP_API + "/product/" + id, {
+    headers: {
+      authtoken,
+    },
+  });
+};

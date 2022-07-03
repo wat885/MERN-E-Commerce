@@ -4,9 +4,9 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const { Meta } = Card;
 
-const AdminProductCard = ({ product }) => {
+const AdminProductCard = ({ product, handleRemove }) => {
   //   console.log(product);
-  const { title, description, images } = product;
+  const { _id, title, description, images } = product;
   return (
     <Card
       hoverable
@@ -20,10 +20,12 @@ const AdminProductCard = ({ product }) => {
       }
       actions={[
         <EditOutlined className="text-warning" />,
-        <DeleteOutlined className="text-danger" />,
+        <DeleteOutlined
+          className="text-danger"
+          onClick={() => handleRemove(_id)}
+        />,
       ]}
     >
-      >
       <Meta title={title} description={description} />
     </Card>
   );

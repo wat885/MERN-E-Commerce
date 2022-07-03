@@ -28,3 +28,15 @@ exports.list = async (req, res) => {
     res.status(500).send("Create Product Error");
   }
 };
+
+exports.remove = async (req, res) => {
+  try {
+    const deleted = await Product.findOneAndRemove({
+      _id: req.params.id,
+    }).exec();
+
+    res.send(deleted);
+  } catch (err) {
+    res.status(500).send("Remove Product Error");
+  }
+};
