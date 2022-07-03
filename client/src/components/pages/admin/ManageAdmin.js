@@ -134,7 +134,7 @@ const ManageAdmin = () => {
         <div className="col">
           <h1>ManageAdmin Page</h1>
 
-          <table class="table">
+          <table className="table">
             <thead>
               <tr>
                 <th scope="col">username</th>
@@ -147,7 +147,7 @@ const ManageAdmin = () => {
             </thead>
             <tbody>
               {data.map((item, index) => (
-                <tr>
+                <tr  key={item._id}>
                   <th scope="row">{item.username}</th>
                   <td>
                     <Select

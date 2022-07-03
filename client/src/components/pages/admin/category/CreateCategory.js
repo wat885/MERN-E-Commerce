@@ -106,7 +106,7 @@ const CreateCategory = () => {
 
           <ul className="list-group">
             {category.map((item) => (
-              <li className="list-group-item">
+              <li className="list-group-item"  key={item._id}>
                 {item.name}
                 <span
                   style={{ float: "right" }}

@@ -40,3 +40,28 @@ exports.remove = async (req, res) => {
     res.status(500).send("Remove Product Error");
   }
 };
+
+exports.read = async (req, res) => {
+  try {
+    // ส่งมากับ url จากหน้าบ้าน  req.params.id
+    const product = await Product.findOne({ _id: req.params.id })
+      .populate("category")
+      .exec();
+    res.send(product);
+  } catch (err) {
+    res.status(500).send("read product error!!");
+  }
+};
+exports.update = async (req, res) => {
+  try {
+    // const { name } = req.body; //ข้อมูลใหม่
+    const product = await Product.findOneAndUpdate(
+      { _id: req.params.id },
+      req.body,
+      { new: true }
+    ).exec();
+    res.send(product);
+  } catch (err) {
+    res.status(500).send("update product error!!");
+  }
+};
